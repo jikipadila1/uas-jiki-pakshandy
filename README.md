@@ -53,8 +53,7 @@ git clone https://github.com/jikipadila1/uas-jiki-pakshandy.git
 cd uas-jiki-pakshandy
 
 # 2. Jalankan script setup
-chmod +x setup.sh
-./setup.sh
+composer install 
 
 # 3. Buat database dan import
 mysql -u root -p -e "CREATE DATABASE census_db"

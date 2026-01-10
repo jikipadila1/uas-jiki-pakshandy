@@ -1,0 +1,31 @@
+# Composer dependencies
+# Vendor folder included for deployment
+# /vendor/
+
+# Environment files
+.env
+.env.*
+.env.production
+.env.staging
+
+# CodeIgniter writable files
+/writable/logs/
+*.log
+/writable/cache/*
+!/writable/cache/.htaccess
+!/writable/cache/index.html
+/writable/debugbar/
+/writable/uploads/*
+!/writable/uploads/.htaccess
+!/writable/uploads/index.html
+/writable/session/*
+!/writable/session/.htaccess
+!/writable/session/index.html
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db

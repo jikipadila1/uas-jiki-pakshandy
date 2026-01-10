@@ -1,0 +1,141 @@
+═══════════════════════════════════════════════════════════════════
+                    PANDUAN INSTALASI
+         UAS Pak Shandy - Sistem Pelanggaran Web
+═══════════════════════════════════════════════════════════════════
+
+REQUIREMENTS:
+-------------
+✓ PHP 8.0 atau lebih tinggi
+✓ MySQL/MariaDB
+✓ XAMPP/WAMP (sudah termasuk PHP & MySQL)
+✓ Composer (download dari: https://getcomposer.org/download/)
+✓ Git (opsional, jika ingin clone)
+
+═══════════════════════════════════════════════════════════════════
+
+CARA INSTALL #1 - DOWNLOAD ZIP
+-------------------------------
+
+1. Download project dari GitHub:
+   https://github.com/jikipadila1/uas-jiki-pakshandy/archive/refs/heads/main.zip
+
+2. Extract ZIP file ke folder XAMPP htdocs:
+   C:\xampp\htdocs\uas-jiki-pakshandy\
+
+3. Buka terminal/command prompt, masuk ke folder project:
+   cd C:\xampp\htdocs\uas-jiki-pakshandy
+
+4. Install dependencies (WAJIB! Jangan skip langkah ini):
+   composer install
+
+   Jika muncul error "composer not found":
+   - Install Composer dulu dari: https://getcomposer.org/download/
+
+5. Buat folder cache (kalau belum ada):
+   mkdir writable\cache
+
+6. Import database menggunakan phpMyAdmin atau MySQL console:
+   - Buka phpMyAdmin: http://localhost/phpmyadmin
+   - Buat database baru dengan nama: census_db
+   - Import file: census_db.sql
+
+7. Jalankan development server:
+   php spark serve
+
+8. Buka browser:
+   http://localhost:8080
+
+═══════════════════════════════════════════════════════════════════
+
+CARA INSTALL #2 - GIT CLONE (RECOMMENDED)
+-----------------------------------------
+
+1. Buka terminal/command prompt
+
+2. Clone repository:
+   git clone https://github.com/jikipadila1/uas-jiki-pakshandy.git
+
+3. Masuk ke folder project:
+   cd uas-jiki-pakshandy
+
+4. Install dependencies (WAJIB!):
+   composer install
+
+5. Buat folder cache:
+   mkdir writable\cache
+
+6. Import database:
+   mysql -u root -p census_db < census_db.sql
+   atau gunakan phpMyAdmin (lihat cara #1 langkah 6)
+
+7. Jalankan server:
+   php spark serve
+
+8. Buka browser:
+   http://localhost:8080
+
+═══════════════════════════════════════════════════════════════════
+
+TROUBLESHOOTING:
+---------------
+
+❌ ERROR: "Failed opening required Boot.php"
+   CAUSE: Tidak menjalankan "composer install"
+   FIX: Jalankan "composer install" di folder project
+
+❌ ERROR: "myclabs/deep-copy not found"
+   CAUSE: Folder vendor corrupt atau incomplete
+   FIX:
+   - Hapus folder vendor
+   - Jalankan "composer install" ulang
+
+❌ ERROR: "Cache unable to write"
+   CAUSE: Folder writable/cache tidak ada
+   FIX: mkdir writable\cache
+
+❌ ERROR: "Database connection failed"
+   CAUSE: Database belum dibuat atau konfigurasi salah
+   FIX:
+   - Pastikan database census_db sudah dibuat
+   - Cek file .env, sesuaikan database username/password
+
+❌ ERROR: "JWT secret key is not configured"
+   CAUSE: JWT secret key belum diset di .env
+   FIX: File .env sudah include JWT secret key, seharusnya tidak error
+
+═══════════════════════════════════════════════════════════════════
+
+LOGIN DEFAULT:
+--------------
+Username: admin
+Password: admin123
+Email: admin@example.com
+
+═══════════════════════════════════════════════════════════════════
+
+FOLDER STRUCTURE:
+-----------------
+app/              - Application code (Controllers, Models, Config)
+public/           - Public accessible files (login.html, etc)
+pelanggaran-fe/   - Frontend application (HTML, CSS, JS)
+vendor/           - Dependencies (installed by composer)
+writable/         - Writable files (logs, cache, session)
+tests/            - Unit tests
+census_db.sql     - Database dump file
+
+═══════════════════════════════════════════════════════════════════
+
+PORT YANG DIGUNAKAN:
+--------------------
+Default: 8080
+Jika port 8080 conflict, gunakan port lain:
+php spark serve --port 8081
+
+═══════════════════════════════════════════════════════════════════
+
+SUPPORT:
+--------
+GitHub: https://github.com/jikipadila1/uas-jiki-pakshandy
+Issues: https://github.com/jikipadila1/uas-jiki-pakshandy/issues
+
+═══════════════════════════════════════════════════════════════════

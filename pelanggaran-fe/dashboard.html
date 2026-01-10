@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Aplikasi Pelanggaran</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <h5 class="text-white mb-0">
+                            <i class="bi bi-shield-fill-check"></i>
+                            Pelanggaran
+                        </h5>
+                        <small class="text-white-50">Dashboard</small>
+                    </div>
+
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="dashboard.html">
+                                <i class="bi bi-house-door"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pelanggaran.html">
+                                <i class="bi bi-exclamation-triangle"></i>
+                                Data Pelanggaran
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="objek-melintas.html">
+                                <i class="bi bi-car-front"></i>
+                                Objek Melintas
+                            </a>
+                        </li>
+                        <li class="nav-item mt-3">
+                            <hr class="bg-secondary">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="logout()">
+                                <i class="bi bi-box-arrow-right"></i>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                    <h1 class="h2">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <span class="badge bg-primary">
+                                <i class="bi bi-person-circle"></i>
+                                <span id="userFullName">Loading...</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex align-items-center">
+                                <div class="stat-icon bg-primary me-3">
+                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="totalPelanggaran">0</h3>
+                                    <p>Total Pelanggaran</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex align-items-center">
+                                <div class="stat-icon bg-success me-3">
+                                    <i class="bi bi-car-front-fill"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="totalObjek">0</h3>
+                                    <p>Total Objek</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex align-items-center">
+                                <div class="stat-icon bg-warning me-3">
+                                    <i class="bi bi-clock-history"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="pelanggaranPending">0</h3>
+                                    <p>Pending</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex align-items-center">
+                                <div class="stat-icon bg-info me-3">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="pelanggaranResolved">0</h3>
+                                    <p>Resolved</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="bi bi-clock"></i>
+                                Pelanggaran Terbaru
+                            </div>
+                            <div class="card-body">
+                                <div id="recentPelanggaran" class="table-responsive">
+                                    <div class="spinner-wrapper">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="bi bi-activity"></i>
+                                Objek Melintas Terbaru
+                            </div>
+                            <div class="card-body">
+                                <div id="recentObjek" class="table-responsive">
+                                    <div class="spinner-wrapper">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Config JS -->
+    <script src="js/config.js"></script>
+
+    <!-- Dashboard JS -->
+    <script>
+        // Check authentication
+        CONFIG.requireAuth();
+
+        // Load user information
+        function loadUserInfo() {
+            const user = CONFIG.getUser();
+            if (user) {
+                document.getElementById('userFullName').textContent = user.full_name;
+            }
+        }
+
+        // Load dashboard statistics
+        async function loadStatistics() {
+            try {
+                // Load total pelanggaran
+                const pelanggaranResponse = await CONFIG.apiCall('/pelanggaran?page=1');
+                if (pelanggaranResponse.status) {
+                    document.getElementById('totalPelanggaran').textContent = pelanggaranResponse.pagination.total;
+                }
+
+                // Load total objek
+                const objekResponse = await CONFIG.apiCall('/objek-melintas?page=1');
+                if (objekResponse.status) {
+                    document.getElementById('totalObjek').textContent = objekResponse.pagination.total;
+                }
+
+                // Load pelanggaran pending
+                const allPelanggaran = await CONFIG.apiCall('/pelanggaran?page=1');
+                if (allPelanggaran.status) {
+                    const pending = allPelanggaran.data.filter(p => p.status === 'pending').length;
+                    const resolved = allPelanggaran.data.filter(p => p.status === 'resolved').length;
+                    document.getElementById('pelanggaranPending').textContent = pending;
+                    document.getElementById('pelanggaranResolved').textContent = resolved;
+                }
+            } catch (error) {
+                console.error('Error loading statistics:', error);
+            }
+        }
+
+        // Load recent pelanggaran
+        async function loadRecentPelanggaran() {
+            try {
+                const response = await CONFIG.apiCall('/pelanggaran?page=1');
+                if (response.status && response.data.length > 0) {
+                    const recentData = response.data.slice(0, 5);
+
+                    let html = `
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tipe</th>
+                                    <th>Lokasi</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    `;
+
+                    recentData.forEach(item => {
+                        const badgeClass = item.status === 'pending' ? 'warning' :
+                                         item.status === 'processed' ? 'info' : 'success';
+                        html += `
+                            <tr>
+                                <td>
+                                    <span class="badge bg-secondary">${item.tipe_pelanggaran}</span>
+                                </td>
+                                <td>${item.lokasi}</td>
+                                <td>
+                                    <span class="badge bg-${badgeClass}">${item.status}</span>
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    html += `
+                            </tbody>
+                        </table>
+                        <div class="text-center mt-3">
+                            <a href="pelanggaran.html" class="btn btn-sm btn-primary">
+                                Lihat Semua <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    `;
+
+                    document.getElementById('recentPelanggaran').innerHTML = html;
+                } else {
+                    document.getElementById('recentPelanggaran').innerHTML = `
+                        <div class="text-center text-muted">
+                            <i class="bi bi-inbox" style="font-size: 48px;"></i>
+                            <p class="mt-2">Belum ada data pelanggaran</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading recent pelanggaran:', error);
+                document.getElementById('recentPelanggaran').innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        Gagal memuat data
+                    </div>
+                `;
+            }
+        }
+
+        // Load recent objek melintas
+        async function loadRecentObjek() {
+            try {
+                const response = await CONFIG.apiCall('/objek-melintas?page=1');
+                if (response.status && response.data.length > 0) {
+                    const recentData = response.data.slice(0, 5);
+
+                    let html = `
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tipe</th>
+                                    <th>Jumlah</th>
+                                    <th>Lokasi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    `;
+
+                    recentData.forEach(item => {
+                        const icon = item.tipe_objek === 'truk' ? 'bi bi-truck' :
+                                    item.tipe_objek === 'mobil' ? 'bi bi-car-front' : 'bi bi-bicycle';
+                        html += `
+                            <tr>
+                                <td>
+                                    <span class="badge bg-primary">
+                                        <i class="${icon}"></i> ${item.tipe_objek}
+                                    </span>
+                                </td>
+                                <td>${item.jumlah}</td>
+                                <td>${item.lokasi}</td>
+                            </tr>
+                        `;
+                    });
+
+                    html += `
+                            </tbody>
+                        </table>
+                        <div class="text-center mt-3">
+                            <a href="objek-melintas.html" class="btn btn-sm btn-primary">
+                                Lihat Semua <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    `;
+
+                    document.getElementById('recentObjek').innerHTML = html;
+                } else {
+                    document.getElementById('recentObjek').innerHTML = `
+                        <div class="text-center text-muted">
+                            <i class="bi bi-inbox" style="font-size: 48px;"></i>
+                            <p class="mt-2">Belum ada data objek</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading recent objek:', error);
+                document.getElementById('recentObjek').innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        Gagal memuat data
+                    </div>
+                `;
+            }
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin logout?')) {
+                CONFIG.removeToken();
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserInfo();
+            loadStatistics();
+            loadRecentPelanggaran();
+            loadRecentObjek();
+        });
+    </script>
+</body>
+</html>

@@ -202,57 +202,8 @@ Response:
 }
 ```
 
-### Pelanggaran CRUD
 
-#### Get All Pelanggaran
-```http
-GET /api/pelanggaran
-Authorization: Bearer {token}
-```
 
-#### Get Pelanggaran by ID
-```http
-GET /api/pelanggaran/{id}
-Authorization: Bearer {token}
-```
-
-#### Create Pelanggaran
-```http
-POST /api/pelanggaran
-Authorization: Bearer {token}
-Content-Type: application/json
-
-{
-  "nama": "John Doe",
-  "kelas": "XII-RPL",
-  "jenis_pelanggaran": "Terlambat",
-  "tanggal": "2024-01-15",
-  "poin": 5
-}
-```
-
-#### Update Pelanggaran
-```http
-PUT /api/pelanggaran/{id}
-Authorization: Bearer {token}
-Content-Type: application/json
-
-{
-  "nama": "John Doe",
-  "kelas": "XII-RPL",
-  "jenis_pelanggaran": "Terlambat",
-  "tanggal": "2024-01-15",
-  "poin": 10
-}
-```
-
-#### Delete Pelanggaran
-```http
-DELETE /api/pelanggaran/{id}
-Authorization: Bearer {token}
-```
-
----
 
 ## 📝 Available Commands
 

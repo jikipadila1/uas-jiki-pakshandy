@@ -70,12 +70,6 @@ php spark serve
 
 ---
 
-## 📖 Panduan Instalasi Lengkap
-
-Untuk panduan instalasi yang lebih detail, troubleshooting, dan konfigurasi web server (XAMPP, Laragon, Apache), silakan baca:
-
-**[📘 INSTALL.md](INSTALL.md)** - Panduan instalasi lengkap dengan troubleshooting
-
 ---
 
 ## 📁 Struktur Project
